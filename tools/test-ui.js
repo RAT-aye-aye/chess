@@ -235,6 +235,24 @@ function rows(w) {
   ok('continue saved game', glyphAt(w2, 'f3') === '♞' && rows(w2) === 2);
 }
 
+/* -------- easter egg: Konami code and 7 taps -------- */
+{
+  const w = boot(null);
+  const seq = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  const press = (k) => w.document.dispatchEvent(new w.KeyboardEvent('keydown', { key: k, bubbles: true }));
+
+  ok('retro off by default', !w.document.body.classList.contains('retro'));
+  seq.forEach(press);
+  ok('konami enables retro', w.document.body.classList.contains('retro'));
+  ok('toast appeared', !!w.document.getElementById('toast'));
+  seq.forEach(press);
+  ok('konami toggles retro off', !w.document.body.classList.contains('retro'));
+
+  for (let i = 0; i < 7; i++) click(w, w.document.getElementById('turnDot'));
+  ok('7 taps enable retro', w.document.body.classList.contains('retro'));
+  ok('lab link present', w.document.querySelector('#foot a[href="lab/"]') !== null);
+}
+
 /* -------- saved orientation is respected when auto-flip is off -------- */
 {
   const w = boot(null);

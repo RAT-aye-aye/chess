@@ -32,6 +32,21 @@ server is stopped (as long as you don't clear site data).
 - Unlimited undo, new game, manual flip.
 - The game is saved automatically; close the browser and come back later.
 
+## HTML Lab
+
+The site also ships a small, public HTML playground at `/lab/` (linked as
+"HTML Lab" under the board): type HTML/CSS/JS, press **Run** (or Ctrl/Cmd +
+Enter) and it renders in a sandboxed preview iframe. Nothing is uploaded and
+nothing runs on a server; the last snippet is kept in `localStorage`. Three
+starter examples are included (card, canvas animation, clock).
+
+## Hidden extras
+
+- `↑ ↑ ↓ ↓ ← → ← → B A` toggles a retro CRT theme.
+- On a phone (no keyboard): tap the round turn indicator above the board 7 times.
+
+Both do the same thing; nothing is hidden from anyone, it's just an Easter egg.
+
 ## Layout
 
 | File | Purpose |
@@ -42,7 +57,9 @@ server is stopped (as long as you don't clear site data).
 | `app.js` | Board rendering, input handling, saved games |
 | `manifest.json`, `icon*.png`, `sw.js` | Installable / offline app |
 | `tools/make_icon.py` | Regenerates the PNG icons (no image libs needed) |
+| `lab/index.html` | Public HTML playground at `/lab/` |
 | `tools/test-ui.js` | Headless UI tests (jsdom) |
+| `tools/test-lab.js` | Headless tests for the lab page |
 
 ## Tests
 
@@ -50,6 +67,7 @@ server is stopped (as long as you don't clear site data).
 node test-engine.js        # perft + SAN + game-state tests
 # UI tests need jsdom:
 NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-ui.js
+NODE_PATH=/tmp/opencode/domtest/node_modules node tools/test-lab.js
 ```
 
 The engine is verified against the standard perft suite (start position to

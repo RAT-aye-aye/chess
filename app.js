@@ -412,6 +412,55 @@
     buzz(8);
   });
 
+  /* ---------- easter egg: Konami code / 7 taps on the turn dot ---------- */
+  const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let konamiPos = 0;
+  let tapCount = 0;
+  let tapTimer = null;
+
+  function showToast(msg) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._hide);
+    toast._hide = setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+
+  function toggleRetro() {
+    const on = document.body.classList.toggle('retro');
+    showToast(on ? 'RETRO MODE — cheat code accepted' : 'Retro mode off');
+    buzz(on ? [12, 40, 12, 40, 20] : 10);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (key === KONAMI[konamiPos]) {
+      konamiPos++;
+      if (konamiPos === KONAMI.length) {
+        konamiPos = 0;
+        toggleRetro();
+      }
+    } else {
+      konamiPos = key === KONAMI[0] ? 1 : 0;
+    }
+  });
+
+  turnDot.addEventListener('click', () => {
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(() => { tapCount = 0; }, 2500);
+    if (tapCount >= 7) {
+      tapCount = 0;
+      toggleRetro();
+    }
+  });
+
   /* ---------- boot ---------- */
   function init() {
     load();
