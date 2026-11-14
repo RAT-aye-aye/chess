@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#14161d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Chess — Pass &amp; Play</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="hud">
+    <div id="statusLine"><span id="turnDot"></span><span id="statusText">White to move</span></div>
+    <div id="subText">Tap a piece to see its moves</div>
+  </header>
+
+  <section id="table">
+    <div id="playerTop" class="player">
+      <div class="who"><span class="dot"></span><span class="name">Black</span></div>
+      <div class="taken" id="takenTop"></div>
+    </div>
+
+    <div id="boardWrap">
+      <div id="board" aria-label="Chess board"></div>
+      <div id="promo" class="promo" hidden>
+        <div class="promo-card">
+          <div class="promo-title">Promote to</div>
+          <div class="promo-options">
+            <button class="promo-btn" data-promo="q">♛</button>
+            <button class="promo-btn" data-promo="r">♜</button>
+            <button class="promo-btn" data-promo="b">♝</button>
+            <button class="promo-btn" data-promo="n">♞</button>
+          </div>
+          <button class="promo-cancel" id="promoCancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="playerBottom" class="player">
+      <div class="who"><span class="dot"></span><span class="name">White</span></div>
+      <div class="taken" id="takenBottom"></div>
+    </div>
+  </section>
+
+  <section id="movesPanel">
+    <ol id="moveList"></ol>
+  </section>
+
+  <nav id="controls">
+    <button id="undoBtn" class="btn">↶ Undo</button>
+    <button id="flipBtn" class="btn">⇅ Flip</button>
+    <button id="autoBtn" class="btn">Auto flip</button>
+    <button id="newBtn" class="btn danger">New</button>
+  </nav>
+</div>
+
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
