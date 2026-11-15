@@ -250,7 +250,7 @@ function rows(w) {
 
   for (let i = 0; i < 7; i++) click(w, w.document.getElementById('turnDot'));
   ok('7 taps enable retro', w.document.body.classList.contains('retro'));
-  ok('lab link present', w.document.querySelector('#foot a[href="lab/"]') !== null);
+  ok('lab link present', w.document.querySelector('#foot a[href="https://varnic.org/lab/"]') !== null);
 }
 
 /* -------- saved orientation is respected when auto-flip is off -------- */

@@ -1,5 +1,5 @@
 /* Offline cache so the app keeps working after the first load. */
-const CACHE = 'chess-passplay-v2';
+const CACHE = 'chess-passplay-v3';
 const ASSETS = [
   './',
   'index.html',
@@ -10,8 +10,7 @@ const ASSETS = [
   'icon.svg',
   'icon-192.png',
   'icon-512.png',
-  'icon-maskable-512.png',
-  'lab/index.html'
+  'icon-maskable-512.png'
 ];
 
 self.addEventListener('install', (event) => {
